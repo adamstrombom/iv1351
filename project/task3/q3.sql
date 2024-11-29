@@ -9,11 +9,11 @@ SELECT
 	SPLIT_PART(name, ' ', 2)  AS last_name,
 	COUNT(*) AS lesson_count
 FROM 
-			instructor AS ins	
-		LEFT JOIN 
-			all_lessons as al		--view of all lessons combined	
-		ON 
-			ins.instructor_id = al.instructor_id
+	instructor AS ins	
+LEFT JOIN 
+	all_lessons as al		--view of all lessons combined	
+ON 
+	ins.instructor_id = al.instructor_id
 WHERE 
 	EXTRACT(MONTH FROM date) = EXTRACT(MONTH FROM CURRENT_DATE)
 	AND 
