@@ -5,12 +5,12 @@ List all ensembles held during the next week, sorted by music genre and weekday.
 
 SELECT 
 	TO_CHAR(el.date, 'Dy') AS weekday,
-	g.genre AS genre_name,
+	g.genre AS genre,
 	CASE 
 		WHEN COUNT(elb.student_id) >= el.max_students THEN 'No seats'
 		WHEN el.max_students - COUNT(elb.student_id) <= 2 THEN '1 or 2 seats'
 		ELSE 'Many seats'
-	END AS booking_status
+	END AS free_seats
 FROM 
 	ensemble_lesson AS el
 LEFT JOIN 
