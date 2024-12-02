@@ -3,17 +3,14 @@ List all ensembles held during the next week, sorted by music genre and weekday.
 */
 
 
-
 SELECT 
-    --el.date,
-    TO_CHAR(el.date, 'Dy') AS weekday,
-    g.genre AS genre_name,
-	--COUNT(elb.student_id) AS bookings_count,
-    CASE 
-        WHEN COUNT(elb.student_id) >= el.max_students THEN 'No seats'
-        WHEN el.max_students - COUNT(elb.student_id) <= 2 THEN '1 or 2 seats'
-        ELSE 'Many seats'
-    END AS booking_status
+	TO_CHAR(el.date, 'Dy') AS weekday,
+	g.genre AS genre_name,
+	CASE 
+		WHEN COUNT(elb.student_id) >= el.max_students THEN 'No seats'
+		WHEN el.max_students - COUNT(elb.student_id) <= 2 THEN '1 or 2 seats'
+		ELSE 'Many seats'
+	END AS booking_status
 FROM 
 	ensemble_lesson AS el
 LEFT JOIN 

@@ -9,6 +9,24 @@ However, it's most likely easier to understand the result if you do place all nu
 -----------------------------------------------------------------------
 
 
+SELECT 
+    TO_CHAR(date, 'Mon') AS month,
+    SUM(CASE WHEN lesson_type = 'individual' THEN 1 ELSE 0 END) AS individual,
+    SUM(CASE WHEN lesson_type = 'group' THEN 1 ELSE 0 END) AS group,
+    SUM(CASE WHEN lesson_type = 'ensemble' THEN 1 ELSE 0 END) AS ensemble,
+    COUNT(*) AS total
+FROM 
+    all_lessons --view for union of all different types of lessons 
+WHERE 
+    EXTRACT(YEAR FROM date) = 2024
+GROUP BY 
+    EXTRACT(MONTH FROM date), TO_CHAR(date, 'Mon')
+ORDER BY 
+    EXTRACT(MONTH FROM date); 
+
+
+/*FIRST ATTEMPT*/
+/*
 SELECT
 	TO_CHAR(month, 'Month') AS month_name,
 	individual_count,
@@ -31,7 +49,7 @@ FROM (
 		month
 	) AS individual
 		
-	LEFT JOIN 
+	FULL JOIN 
 	
 	(
 	--group
@@ -51,7 +69,7 @@ FROM (
 	) AS ind_gro
 		
 
-	LEFT JOIN
+	FULL JOIN
 	
 	(
 	--ensemble
@@ -70,7 +88,10 @@ FROM (
 
 			
 )
+*/
 
 	
-	
-		
+
+
+
+

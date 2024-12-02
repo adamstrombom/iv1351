@@ -2,7 +2,9 @@
 
 --merge all different lessons as a view containing all columns they all have in common
 CREATE VIEW all_lessons AS
-	SELECT	
+	SELECT
+		lesson_id,	
+		'individual' AS lesson_type,
 		instructor_id,
 		date,
 		time,
@@ -15,6 +17,8 @@ CREATE VIEW all_lessons AS
 	UNION ALL
 
 	SELECT
+		lesson_id,
+		'group' AS lesson_type,
 		instructor_id,
 		date,
 		time,
@@ -27,6 +31,8 @@ CREATE VIEW all_lessons AS
 	UNION ALL
 
 	SELECT
+		lesson_id,
+		'ensemble' AS lesson_type,
 		instructor_id,
 		date,
 		time,
